@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 // Game
 import Model from './Game/Model';
-import dimensions from './Game/Dimensions';
 import themes from './Game/themes';
-import difficulty from './Game/difficulty';
+// import dimensions from './Game/Dimensions';
+// import difficulty from './Game/difficulty';
 // Components
 import Title from './Components/Title';
 import Bar from './Components/Bar';
 import Grid from './Components/Grid';
-import Picker from './Components/Picker';
+import Palette from './Components/Palette';
 // Stylesheet
 import './App.css';
 
@@ -21,8 +21,20 @@ class App extends Component {
       selectedTheme: props.selectedDifficulty,
       model: new Model(props.selectedLength),
     }
-    console.log(this.state)
+    this.onCellClick = this.onCellClick.bind(this);
+    this.fill = this.fill.bind(this);
   }
+
+  fill(color) {
+    this.state.model.fill(color);
+    console.log(this.state.model.filled);
+  }
+
+  onCellClick(event) {
+    let colorClicked = Number(event.target.attributes.color.value);
+    this.fill(colorClicked);
+  }
+
   render() {
     return (
       <div id="app">
@@ -31,8 +43,10 @@ class App extends Component {
         <Grid
           selectedLength={this.state.model.length}
           selectedTheme={themes.colors[this.state.selectedTheme]}
-          colors={this.state.model.colors} />
-        <Picker />
+          colors={this.state.model.colors}
+          onCellClick={this.onCellClick} />
+        <Palette
+          selectedTheme={themes.colors[this.state.selectedTheme]}/>
       </div>
     );
   }
