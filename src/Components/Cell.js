@@ -2,10 +2,13 @@ import React from 'react';
 import '../App.css'
 import './Cell.css';
 
-const Cell = ( { length, cell, color } ) => {
-  const classNameString = `cell-${length} ${color}`;
+const Cell = ( { length, cell, colorValue, colorIndex } ) => {
+  const classNameString = `cell-${length} ${colorValue}`;
   return (
-    <div className={classNameString}></div>
+    <div
+      className={classNameString}
+      color={`${colorIndex}`}>
+    </div>
   );
 }
 
