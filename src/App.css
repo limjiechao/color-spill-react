@@ -1,3 +1,9 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+}
+
 /* Themes */
 
 /* T1: 'Kiddy', */
