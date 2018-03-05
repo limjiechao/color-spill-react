@@ -2,7 +2,7 @@ import React from 'react';
 import Color from './Color'
 import './Palette.css'
 
-const Palette = ({ selectedTheme }) => {
+const Palette = ({ selectedTheme, onClick }) => {
   const colors = Object.entries(selectedTheme).map(([index, color]) => {
     return (
       <Color
@@ -12,7 +12,7 @@ const Palette = ({ selectedTheme }) => {
     );
   });
   return (
-    <div id="palette">
+    <div id="palette" onClick={onClick}>
       { colors }
     </div>
   );
