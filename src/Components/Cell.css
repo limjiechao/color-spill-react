@@ -1,0 +1,16 @@
+/* '10 × 10' grid */
+.cell-10 {
+  width: 10%;
+  height: 10%;
+}
+/* '16 × 16' grid */
+.cell-16 {
+  width: 6.25%;
+  height: 6.25%;
+}
+
+/* '25 × 25' grid */
+.cell-25 {
+  width: 4%;
+  height: 4%;
+}
