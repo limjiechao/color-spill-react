@@ -1,12 +1,20 @@
 import React from 'react';
-import Cell from './Cell'
+import Cell from './Cell';
 import './Grid.css';
 
-const cells = () => {
-  // return <Cell color={themes.colors[]} length={} cell={} key={}/>
-}
+const Grid = ({ selectedLength, selectedTheme, colors }) => {
+  const cells = [];
 
-const Grid = () => {
+  colors.forEach((color, cell) => {
+    cells.push(
+      <Cell
+        length={selectedLength}
+        cell={cell}
+        color={selectedTheme[color]}
+        key={`cell-${cell}`} />
+    );
+  });
+
   return (
     <div id="grid">
       { cells }
