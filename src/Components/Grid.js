@@ -2,10 +2,10 @@ import React from 'react';
 import Cell from './Cell';
 import './Grid.css';
 
-const Grid = ({ selectedLength, selectedTheme, colors, onCellClick }) => {
-  const cells = [];
+const Grid = ({ selectedLength, selectedTheme, colors, onClick }) => {
+  let cells = [];
 
-  colors.forEach((color, cell, onCellClick) => {
+  colors.forEach((color, cell) => {
     cells.push(
       <Cell
         length={selectedLength}
@@ -17,7 +17,7 @@ const Grid = ({ selectedLength, selectedTheme, colors, onCellClick }) => {
   });
 
   return (
-    <div id="grid" onClick={onCellClick}>
+    <div id="grid" onClick={onClick}>
       { cells }
     </div>
   );

@@ -21,18 +21,21 @@ class App extends Component {
       selectedTheme: props.selectedDifficulty,
       model: new Model(props.selectedLength),
     }
-    this.onCellClick = this.onCellClick.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.fill = this.fill.bind(this);
   }
 
   fill(color) {
     this.state.model.fill(color);
-    console.log(this.state.model.filled);
   }
 
-  onCellClick(event) {
-    let colorClicked = Number(event.target.attributes.color.value);
-    this.fill(colorClicked);
+  onClick(event) {
+    let target = event.target.attributes.color
+    if (target !== undefined) {
+      let colorClicked = Number(target.value);
+      this.fill(colorClicked);
+      this.setState({});
+    }
   }
 
   render() {
@@ -44,9 +47,10 @@ class App extends Component {
           selectedLength={this.state.model.length}
           selectedTheme={themes.colors[this.state.selectedTheme]}
           colors={this.state.model.colors}
-          onCellClick={this.onCellClick} />
+          onClick={this.onClick} />
         <Palette
-          selectedTheme={themes.colors[this.state.selectedTheme]}/>
+          selectedTheme={themes.colors[this.state.selectedTheme]}
+          onClick={this.onClick}/>
       </div>
     );
   }
