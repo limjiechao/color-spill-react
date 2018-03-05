@@ -1,0 +1,24 @@
+.circle {
+	display: inline-block;
+  height: 5.5vw;
+  min-height: 30px;
+	max-height: 48px;
+  width: 5.5vw;
+  min-width: 30px;
+	max-width: 48px;
+	margin: 1vh 0.6vw 0 0.6vw;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 6px;
+	border-color: black;
+}
+
+.circle:focus {
+	border-style: solid;
+	border-width: 1vh;
+	border-color: black;
+}
+
+.circle:active {
+	border-color: white;
+}
