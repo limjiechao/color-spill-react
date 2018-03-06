@@ -17,8 +17,10 @@ const Grid = ({ length, theme, colors, onClick }) => {
   });
 
   return (
-    <div id="grid" onClick={onClick}>
-      { cells }
+    <div id="grid-container">
+      <div id="grid" onClick={onClick}>
+        { cells }
+      </div>
     </div>
   );
 }
