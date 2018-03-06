@@ -20,6 +20,7 @@ class App extends Component {
       difficulty: props.difficulty,
       theme: props.theme,
       model: new Model(props.length),
+      moves: difficulty.level[props.difficulty][props.length]
     }
     this.onClick = this.onClick.bind(this);
     this.fill = this.fill.bind(this);
