@@ -8,10 +8,14 @@ class Model {
     this.neighbors = new Map();
     this.filled = new Set();
     this.filled.add(1);
+
     for (let cell = 1; cell <= this.length * this.length ; cell++) {
       this.colors.set(cell, Math.floor(Math.random() * 6 + 1));
       this.neighbors.set(cell, this.findNeighbor(cell, this.length));
     }
+    
+    let cellOneColor = this.colors.get(1)
+    this.fill(cellOneColor);
   }
 
   fill(color) {
