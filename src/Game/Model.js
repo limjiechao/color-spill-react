@@ -13,15 +13,16 @@ class Model {
       this.colors.set(cell, Math.floor(Math.random() * 6 + 1));
       this.neighbors.set(cell, this.findNeighbor(cell, this.length));
     }
-    
-    let cellOneColor = this.colors.get(1)
-    this.fill(cellOneColor);
+
+    this.fill(this.getOldFillColor());
   }
 
   fill(color) {
     this.filled.forEach((cell) => {
+      // Set previously filled cell to new color
       this.colors.set(cell, color);
       this.neighbors.get(cell).forEach((neighbor) => {
+        // If neighbor is in new color, add to `filled`
         if (this.colors.get(neighbor) === this.colors.get(cell)) {
           this.filled.add(neighbor);
         }
@@ -38,6 +39,10 @@ class Model {
     if ((cellNumber - 1) % gridSize !== 0) neighbors.push(cellNumber - 1);
 
     return neighbors;
+  }
+
+  getOldFillColor() {
+    return this.colors.get(1);
   }
 }
 
