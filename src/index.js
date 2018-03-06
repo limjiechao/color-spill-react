@@ -6,8 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <App
-    selectedLength={2}
-    selectedDifficulty={1}
-    selectedTheme={1} />,
+    length={2}
+    difficulty={2}
+    theme={1} />,
   document.getElementById('root'));
 registerServiceWorker();

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // Game
 import Model from './Game/Model';
 import themes from './Game/themes';
+import difficulty from './Game/difficulty';
 // import dimensions from './Game/Dimensions';
-// import difficulty from './Game/difficulty';
 // Components
 import Title from './Components/Title';
 import Bar from './Components/Bar';
@@ -16,10 +16,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedLength: props.selectedLength,
-      selectedDifficulty: props.selectedTheme,
-      selectedTheme: props.selectedDifficulty,
-      model: new Model(props.selectedLength),
+      length: props.length,
+      difficulty: props.difficulty,
+      theme: props.theme,
+      model: new Model(props.length),
     }
     this.onClick = this.onClick.bind(this);
     this.fill = this.fill.bind(this);
@@ -44,13 +44,13 @@ class App extends Component {
         <Title />
         <Bar />
         <Grid
-          selectedLength={this.state.model.length}
-          selectedTheme={themes.colors[this.state.selectedTheme]}
+          length={this.state.model.length}
+          theme={themes.colors[this.state.theme]}
           colors={this.state.model.colors}
           onClick={this.onClick} />
         <Palette
-          selectedTheme={themes.colors[this.state.selectedTheme]}
-          onClick={this.onClick}/>
+          theme={themes.colors[this.state.theme]}
+          onClick={this.onClick} />
       </div>
     );
   }

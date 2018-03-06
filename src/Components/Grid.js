@@ -2,15 +2,15 @@ import React from 'react';
 import Cell from './Cell';
 import './Grid.css';
 
-const Grid = ({ selectedLength, selectedTheme, colors, onClick }) => {
+const Grid = ({ length, theme, colors, onClick }) => {
   let cells = [];
 
   colors.forEach((color, cell) => {
     cells.push(
       <Cell
-        length={selectedLength}
+        length={length}
         cell={cell}
-        colorValue={selectedTheme[color]}
+        colorValue={theme[color]}
         colorIndex={color}
         key={`cell-${cell}`} />
     );

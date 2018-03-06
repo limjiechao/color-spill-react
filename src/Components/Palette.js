@@ -2,8 +2,8 @@ import React from 'react';
 import Color from './Color'
 import './Palette.css'
 
-const Palette = ({ selectedTheme, onClick }) => {
-  const colors = Object.entries(selectedTheme).map(([index, color]) => {
+const Palette = ({ theme, onClick }) => {
+  const colors = Object.entries(theme).map(([index, color]) => {
     return (
       <Color
         colorIndex={index}
