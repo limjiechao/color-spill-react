@@ -10,7 +10,7 @@ import Bar from './Components/Bar';
 import Grid from './Components/Grid';
 import Palette from './Components/Palette';
 // Stylesheet
-import './App.css';
+import './Stylesheets/App.css';
 
 class App extends Component {
   constructor(props) {

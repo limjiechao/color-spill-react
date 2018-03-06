@@ -1,6 +1,5 @@
 import React from 'react';
-import '../App.css'
-import './Cell.css';
+import '../Stylesheets/Cell.css';
 
 const Cell = ( { length, cell, colorValue, colorIndex } ) => {
   const classNameString = `cell-${length} ${colorValue}`;

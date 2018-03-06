@@ -1,6 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
-import './Grid.css';
+import '../Stylesheets/Grid.css';
 
 const Grid = ({ length, theme, colors, onClick }) => {
   let cells = [];

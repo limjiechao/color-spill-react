@@ -1,5 +1,5 @@
 import React from 'react';
-import './Color.css'
+import '../Stylesheets/Color.css'
 
 const Color = ({ colorIndex, colorValue }) => {
   const classNameString = `circle ${colorValue}`
