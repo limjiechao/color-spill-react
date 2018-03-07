@@ -44,6 +44,10 @@ class Model {
   getOldFillColor() {
     return this.colors.get(1);
   }
+
+  isGridFilled() {
+    return this.filled.size === this.cells.size;
+  }
 }
 
 export default Model;
