@@ -15,9 +15,7 @@ import './Stylesheets/App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-
     let { length, level, theme } = props
-
     let moves = difficulty.level[level][length];
     let model = new Model(length);
     let oldFillColor = model.getOldFillColor();
@@ -29,12 +27,18 @@ class App extends Component {
       model,
       totalMoves: moves,
       remainingMoves: moves,
-      oldFillColor
+      oldFillColor,
+      title: 'COLOR SPILL!',
+      gameWillContinue: true
     }
 
-    this.onClick = this.onClick.bind(this);
     this.fill = this.fill.bind(this);
     this.deductMoves = this.deductMoves.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.setOldFillColor = this.setOldFillColor.bind(this);
+    this.isGridFilled = this.isGridFilled.bind(this);
+    this.restartGame = this.restartGame.bind(this);
+    this.restartSequence = this.restartSequence.bind(this);
   }
 
   fill(color) {
@@ -59,30 +63,126 @@ class App extends Component {
     });
   }
 
+  isGridFilled(model) {
+    return model.isGridFilled();
+  }
+
+  hasMovesLeft(remainingMoves) {
+  	return remainingMoves !== 0 ? true : false;
+  }
+
+  doesGameContinue(model, remainingMoves) {
+    let hasMoves = this.hasMovesLeft(remainingMoves);
+    let gridFilled = this.isGridFilled(model);
+
+    // Four Possibilities:
+
+    // 1. Has moves and grid not filled => continue
+    if (hasMoves && gridFilled === false) {
+      this.setState({
+        gameWillContinue: true
+      });
+    }
+
+    // 2. No moves and grid not filled => stop and lost
+    if (!hasMoves && !gridFilled) {
+      this.setState({
+        title: 'GAME OVER!',
+        gameWillContinue: false
+      });
+    }
+
+    // 3. Has moves and grid filled => stop and win
+    // 4. No moves and grid filled => stop and win
+    if (gridFilled) {
+      this.setState({
+        title: 'YOU DID IT!',
+        gameWillContinue: false
+      });
+    }
+  }
+
   onClick(event) {
     let target = event.target.attributes.color
-    let { remainingMoves, oldFillColor } = this.state;
+    let { model, remainingMoves, oldFillColor } = this.state;
 
     if (target !== undefined) {
       let colorClicked = Number(target.value);
-      
+
       if (colorClicked !== oldFillColor) {
-        this.deductMoves();
         this.fill(colorClicked);
         this.setOldFillColor(colorClicked);
+        this.deductMoves();
+        this.doesGameContinue(model, remainingMoves - 1);
       }
     }
   }
 
+  restartGame() {
+    let { length, level, theme } = this.state;
+    let moves = difficulty.level[level][length];
+    let model = new Model(length);
+    let oldFillColor = model.getOldFillColor();
+
+    this.setState({
+      length,
+      level,
+      theme,
+      model,
+      totalMoves: moves,
+      remainingMoves: moves,
+      oldFillColor,
+      title: 'COLOR SPILL!',
+      gameWillContinue: true
+    });
+  }
+
+  restartSequence() {
+    let splashInterval = null;
+
+		const startSplashSequence = () => {
+      this.restartGame();
+			splashInterval = setTimeout(startSplashSequence, 75);
+		}
+
+		const stopSplashSequence = () => {
+			clearTimeout(splashInterval);
+		}
+
+		const splashSequence = () => {
+			stopSplashSequence();
+			startSplashSequence();
+			setTimeout(function() {
+				stopSplashSequence();
+			}, 1200);
+		}
+
+		splashSequence();
+  }
+
+  componentWillUpdate(_, nextState) {
+    let { remainingMoves, gameWillContinue } = nextState;
+
+    if (!gameWillContinue) {
+      this.onClick = null;
+    }
+
+    if (remainingMoves === 0) {
+      this.onClick = null;
+    }
+  }
+
   render() {
-    let { remainingMoves, totalMoves, model, theme } = this.state;
+    let { remainingMoves, totalMoves, model, theme, title } = this.state;
 
     return (
       <div id="app">
-        <Title />
+        <Title
+          text={title} />
         <Bar
           remainingMoves={remainingMoves}
-          totalMoves={totalMoves} />
+          totalMoves={totalMoves}
+          restartGame={this.restartSequence} />
         <Grid
           length={model.length}
           theme={themes.colors[theme]}
