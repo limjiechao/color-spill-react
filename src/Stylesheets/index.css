@@ -8,6 +8,6 @@ body {
   color: white;
 }
 
-div, body {
+div, body, html {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
