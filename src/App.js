@@ -105,8 +105,9 @@ class App extends Component {
   onClick(event) {
     let target = event.target.attributes.color
     let { model, remainingMoves, oldFillColor } = this.state;
-    
-    if (remainingMoves === 0) {
+    let isGridFilled = this.isGridFilled(model);
+
+    if (remainingMoves === 0 || isGridFilled) {
       return;
     }
 
