@@ -105,6 +105,10 @@ class App extends Component {
   onClick(event) {
     let target = event.target.attributes.color
     let { model, remainingMoves, oldFillColor } = this.state;
+    
+    if (remainingMoves === 0) {
+      return;
+    }
 
     if (target !== undefined) {
       let colorClicked = Number(target.value);
@@ -158,18 +162,6 @@ class App extends Component {
 		}
 
 		splashSequence();
-  }
-
-  componentWillUpdate(_, nextState) {
-    let { remainingMoves, gameWillContinue } = nextState;
-
-    if (!gameWillContinue) {
-      this.onClick = null;
-    }
-
-    if (remainingMoves === 0) {
-      this.onClick = null;
-    }
   }
 
   render() {
