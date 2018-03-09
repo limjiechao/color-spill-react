@@ -28,23 +28,23 @@ You can also check out the *old* [Color Spill!](https://limjiechao.github.io/pro
 
 # New Color-Filling Algorithm
 
-- A JavaScript Map object is used to map every cell number to its color at the start.
+## Brief Description
+
+- An ES6 Map object is used to map every cell number to its color at the start.
 	- Each time after a new color is chosen, filled cells will be mapped to the new color in the Map.
-- A Javascript Set Object is used to track filled cells.
+- An ES6 Set object is used to track filled cells.
 	- Each cell only occurs once in the Set regardless of how many times it has been added.
 	- To determine whether the player has won the game, simply check that the size of the Set is equal to the total number of cells.
-- Another JavaScript Map is used to map the cell number to an array containing the cell numbers of all its neighboring cells.
-	- Every cell's neighbors are predetermined at the start.
-	- Each time after a new color is chosen, the neighors of every filled cell would be checked to see if they are in the new color. If they are in the new color, they will be added to the Set of filled cells.
+- An ES6 Map object is used to map the cell number to an array containing the cell numbers of all its neighboring cells.
+	- Every cell's neighbors are pre-mapped at the start.
+	- Each time after a new color is chosen, the neighbors of every filled cell would be checked to see if they are in the new color. If they are in the new color, they will be added to the Set of filled cells.
 
 ## Run-through of the Color-Filling Algorithm
 
 - New fill color is choosen.
 - Change the filled cells to new fill color.
-- Check neighboring cells of filled cells and for those already in the new fill color, add them to filled cells
-- Check `size` of filled cells Set. If size is equal to total number of cells, player has won the game.
-
-
+- Using ES6 Map of cell neighbors, neighboring cells of filled cells are checked. For neighboring cells already in the new fill color, i.e. new additions, add them to ES6 Set of filled cells.
+- Check `size` of filled cells ES6 Set. If size is equal to total number of cells, player has won the game.
 
 # Wireframes
 
